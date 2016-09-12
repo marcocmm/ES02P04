@@ -1,0 +1,1 @@
+Esta pasta contém todos os documentos diversos que não se enquadram nos itens documentos téncicos e documentos de projeto
