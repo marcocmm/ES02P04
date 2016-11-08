@@ -10,5 +10,27 @@ package model.adress;
  * @author marco
  */
 public class State {
+    private String name;
+    private String abbreviation;
+    private Country country;
+
+    public State(String name, String abbreviation, Country country) {
+        this.name = name;
+        this.abbreviation = abbreviation;
+        this.country = country;
+    }
+
+    public String getAbbreviation() {
+        return abbreviation;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public String getName() {
+        return name;
+    }
+    
     
 }

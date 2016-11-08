@@ -10,5 +10,5 @@ package model;
  * @author marco
  */
 public enum Role {
-    
+    Autor, CoAutor, Orientador, CoOrientador;
 }

@@ -10,5 +10,5 @@ package model.adress;
  * @author marco
  */
 public enum StreetType {
-    
+    Avenida, Rua;
 }

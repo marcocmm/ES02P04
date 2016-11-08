@@ -5,10 +5,21 @@
  */
 package model;
 
+import model.adress.Country;
+
 /**
  *
  * @author marco
  */
 public class Language {
+    private String language;
+    private Country country;
+    private String abbreviation;
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

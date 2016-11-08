@@ -5,10 +5,29 @@
  */
 package model;
 
+import java.util.Map;
+
 /**
  *
  * @author marco
  */
 public class LanguageProficiency {
+    Language language;
+    Map<Skill, Level> skillHasLevel;
+
+    public LanguageProficiency(Language language, Map<Skill,Level> skills) {
+        this.language = language;
+        this.skillHasLevel = skillHasLevel;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public Map<Skill, Level> getSkills() {
+        return skillHasLevel;
+    }
+    
+    
     
 }

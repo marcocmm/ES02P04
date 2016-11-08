@@ -10,5 +10,5 @@ package model;
  * @author marco
  */
 public enum Skill {
-    
+    Reading, Writing, Speaking, Comprehension;
 }

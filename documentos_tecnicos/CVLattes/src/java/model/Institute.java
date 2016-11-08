@@ -9,6 +9,18 @@ package model;
  *
  * @author marco
  */
-public class Institute {
-    
+public class Institute extends User{
+
+    public Institute(Credential credential, InstituteName name) {
+
+    }
+
+    public Institute(Credential credential, String name) {
+
+    }
+
+    public String getCNPJ() {
+        return "";
+    }
+
 }

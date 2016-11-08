@@ -9,6 +9,15 @@ package model;
  *
  * @author marco
  */
-public class PersonName {
+public class PersonName extends Name{
+    private String last;
+    private String middle;
+    private String first;
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

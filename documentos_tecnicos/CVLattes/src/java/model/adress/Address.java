@@ -11,10 +11,10 @@ import java.util.Date;
  *
  * @author marco
  */
-public class Adress {
+public class Address {
     private Date initialDate;
     private Date finalDate;
-    private AdressType type;
+    private AddressType type;
     private City city;
     private StreetType streetType;
     private String street;
@@ -22,7 +22,7 @@ public class Adress {
     private int cep;
     private String complemento;
 
-    public Adress(Date initialDate, Date finalDate, AdressType type, City city, StreetType streetType, String street, byte number, int cep, String complemento) {
+    public Address(Date initialDate, Date finalDate, AddressType type, City city, StreetType streetType, String street, byte number, int cep, String complemento) {
         this.initialDate = initialDate;
         this.finalDate = finalDate;
         this.type = type;
@@ -50,11 +50,11 @@ public class Adress {
         return finalDate;
     }
 
-    public void setType(AdressType type) {
+    public void setType(AddressType type) {
         this.type = type;
     }
 
-    public AdressType getType() {
+    public AddressType getType() {
         return type;
     }
 

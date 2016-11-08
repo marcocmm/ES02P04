@@ -5,10 +5,21 @@
  */
 package model;
 
+import java.util.Collection;
+import java.util.Map;
+
 /**
  *
  * @author marco
  */
 public class Curriculum {
+ private Person user;
+    Collection<Document> documents;
+    Collection<LanguageProficiency> languages;
+    Map<Document,Achievement> achievements;
+
+    public Curriculum(User user) {
+    }
+    
     
 }

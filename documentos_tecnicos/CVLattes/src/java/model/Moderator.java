@@ -10,5 +10,12 @@ package model;
  * @author marco
  */
 public class Moderator {
+    private Credential credential;
+
+    public Moderator(Credential credential) {
+        this.credential = credential;
+    }
     
+    public void deleteUser(User user){
+    }
 }

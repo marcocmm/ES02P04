@@ -10,5 +10,21 @@ package model;
  * @author marco
  */
 public class Loggable {
+    private Credential credential;
+
+    public Loggable(Credential credential) {
+        this.credential = credential;
+    }
+    
+    public void login(){
+    }
+    public void logout(){
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

@@ -10,5 +10,12 @@ package model;
  * @author marco
  */
 public class InstituteName {
+    private String name;
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }

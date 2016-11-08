@@ -9,6 +9,6 @@ package model.adress;
  *
  * @author marco
  */
-public enum AdressType {
-    
+public enum AddressType {
+    Trabalho, Resisdencia;
 }

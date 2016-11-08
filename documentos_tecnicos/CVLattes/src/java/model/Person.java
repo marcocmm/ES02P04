@@ -9,6 +9,17 @@ package model;
  *
  * @author marco
  */
-public class Person {
+public class Person extends User{
+    private Curriculum curriculum;
+
+    public Person(Credential credential, PersonName name) {
+        
+    }
+    
+    public Person(Credential credential, String name) {
+        
+    }
+    
+    
     
 }
