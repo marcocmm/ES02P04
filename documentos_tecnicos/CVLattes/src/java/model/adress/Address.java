@@ -18,11 +18,11 @@ public class Address {
     private City city;
     private StreetType streetType;
     private String street;
-    private byte number;
+    private int number;
     private int cep;
     private String complemento;
 
-    public Address(Date initialDate, Date finalDate, AddressType type, City city, StreetType streetType, String street, byte number, int cep, String complemento) {
+    public Address(Date initialDate, Date finalDate, AddressType type, City city, StreetType streetType, String street, int number, int cep, String complemento) {
         this.initialDate = initialDate;
         this.finalDate = finalDate;
         this.type = type;
@@ -82,7 +82,7 @@ public class Address {
         this.number = number;
     }
 
-    public byte getNumber() {
+    public int getNumber() {
         return number;
     }
 

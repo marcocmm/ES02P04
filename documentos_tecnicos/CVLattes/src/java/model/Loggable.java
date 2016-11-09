@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marco
  */
-public class Loggable {
+public abstract class Loggable implements Serializable{
     private Credential credential;
 
     public Loggable(Credential credential) {

@@ -9,12 +9,13 @@ package model;
  *
  * @author marco
  */
-public class Moderator {
+public class Moderator extends Loggable{
     private Credential credential;
 
     public Moderator(Credential credential) {
-        this.credential = credential;
+        super(credential);
     }
+
     
     public void deleteUser(User user){
     }

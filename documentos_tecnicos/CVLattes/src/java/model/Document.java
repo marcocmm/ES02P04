@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -12,16 +13,16 @@ import java.util.Map;
  *
  * @author marco
  */
-public class Document {
+public class Document implements Serializable{
     private Map<Person,Role> authorHasRole;
     private String title;
-    private byte year;
+    private int year;
     Institute institute;
     Collection<String> keywords;
     String researchArea;
     Language language;
 
-    public Document(Map<Person, Role> authorHasRole, String title, byte year, Language language) {
+    public Document(Map<Person, Role> authorHasRole, String title, int year, Language language) {
         this.authorHasRole = authorHasRole;
         this.title = title;
         this.year = year;

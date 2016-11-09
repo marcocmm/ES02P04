@@ -9,7 +9,7 @@ package model;
  *
  * @author marco
  */
-public class Name {
+public abstract class Name {
 
     @Override
     public String toString() {

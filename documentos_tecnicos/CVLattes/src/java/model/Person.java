@@ -5,21 +5,51 @@
  */
 package model;
 
+import java.util.Collection;
+
 /**
  *
  * @author marco
  */
-public class Person extends User{
-    private Curriculum curriculum;
+public class Person extends User {
 
-    public Person(Credential credential, PersonName name) {
-        
+    private Curriculum curriculum;
+    private String cpf;
+
+    public Person(PersonName name, Credential credential, String cpf) {
+        super(name, credential);
+        this.cpf = cpf;
+
     }
-    
-    public Person(Credential credential, String name) {
+
+    public Person(String name, Credential credential, String cpf) {
+        super(name, credential);
+        this.cpf = cpf;
         
+        //implementar name
+
     }
-    
-    
-    
+
+    public String getCPF() {
+        return cpf;
+    }
+
+    public void addDocument(Document document) {
+    }
+
+    public Document getDocument(Document document) {
+        return document;
+    }
+
+    public void updateDocument(Document document) {
+
+    }
+
+    public void removeDocument(Document document) {
+
+    }
+
+//    public Collection<Document> listDocuments() {
+//        return;
+//    }    
 }

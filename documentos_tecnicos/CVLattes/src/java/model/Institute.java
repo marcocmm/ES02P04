@@ -9,18 +9,25 @@ package model;
  *
  * @author marco
  */
-public class Institute extends User{
+public class Institute extends User {
+    
+    private String cnpj;
 
-    public Institute(Credential credential, InstituteName name) {
+    public Institute(Credential credential, InstituteName name, String cnpj) {
+        super(name, credential);
+        this.cnpj = cnpj;
 
     }
 
-    public Institute(Credential credential, String name) {
-
+    public Institute(Credential credential, String name, String cnpj) {
+        super(name, credential);
+        this.cnpj = cnpj;
+        //implementar name
     }
 
     public String getCNPJ() {
-        return "";
+        return cnpj;
     }
+
 
 }

@@ -12,24 +12,24 @@ import model.adress.Address;
  *
  * @author marco
  */
-public class User {
+public abstract class User extends Loggable{
 
     private Name name;
     private String email;
     private Collection<Address> address;
 
-    public User(Name name, String email, Collection<Address> address) {
+    public User(Name name, Credential credential) {
+        super(credential);
         this.name = name;
-        this.email = email;
-        this.address = address;
+    }
+    
+    
+    public User(String nameStr, Credential credential) {
+        super(credential);
+        
+        //implementar this.name = nameStr;
     }
 
-    public User(String nameStr, String email, Collection<Address> address) {
-        //implementar
-
-        this.email = email;
-        this.address = address;
-    }
 
     public Name getName() {
         return name;
