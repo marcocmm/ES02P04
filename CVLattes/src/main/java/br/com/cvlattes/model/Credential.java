@@ -23,6 +23,14 @@ public class Credential {
         
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public String getPassword() {
+        return password;
+    }
     
     
 }

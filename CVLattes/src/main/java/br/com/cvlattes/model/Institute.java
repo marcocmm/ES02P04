@@ -11,22 +11,19 @@ package br.com.cvlattes.model;
  */
 public class Institute extends User {
     
-    private String cnpj;
 
-    public Institute(Credential credential, InstituteName name, String cnpj) {
+    public Institute(Credential credential, InstituteName name) {
         super(name, credential);
-        this.cnpj = cnpj;
 
     }
 
-    public Institute(Credential credential, String name, String cnpj) {
+    public Institute(Credential credential, String name) {
         super(name, credential);
-        this.cnpj = cnpj;
         //implementar name
     }
 
     public String getCNPJ() {
-        return cnpj;
+        return super.getCredential().getIdentifier();
     }
 
 

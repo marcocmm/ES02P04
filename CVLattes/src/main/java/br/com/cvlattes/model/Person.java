@@ -14,24 +14,21 @@ import java.util.Collection;
 public class Person extends User {
 
     private Curriculum curriculum;
-    private String cpf;
 
-    public Person(PersonName name, Credential credential, String cpf) {
+    public Person(PersonName name, Credential credential) {
         super(name, credential);
-        this.cpf = cpf;
 
     }
 
-    public Person(String name, Credential credential, String cpf) {
+    public Person(String name, Credential credential) {
         super(name, credential);
-        this.cpf = cpf;
         
         //implementar name
 
     }
 
     public String getCPF() {
-        return cpf;
+        return super.getCredential().getIdentifier();
     }
 
     public void addDocument(Document document) {

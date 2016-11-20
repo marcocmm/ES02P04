@@ -23,6 +23,10 @@ public abstract class Loggable implements Serializable{
     public void logout(){
     }
 
+    protected Credential getCredential() {
+        return credential;
+    }
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.

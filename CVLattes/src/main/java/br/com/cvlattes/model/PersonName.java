@@ -15,6 +15,12 @@ public class PersonName extends Name {
     private String middle;
     private String first;
 
+    public PersonName(String first, String middle, String last) {
+        this.last = last;
+        this.middle = middle;
+        this.first = first;
+    }
+
     public PersonName(String name) {
         String[] n = name.split(" ");
         this.first = n[0];

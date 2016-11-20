@@ -12,6 +12,7 @@ import java.util.Date;
  * @author marco
  */
 public class Address {
+
     private Date initialDate;
     private Date finalDate;
     private AddressType type;
@@ -31,6 +32,20 @@ public class Address {
         this.street = street;
         this.number = number;
         this.cep = cep;
+        this.complemento = complemento;
+    }
+
+    public Address(Date initialDate, Date finalDate, AddressType type, City city, StreetType streetType, String street, String number, String cep, String complemento) {
+        this.initialDate = initialDate;
+        this.finalDate = finalDate;
+        this.type = type;
+        this.city = city;
+        this.streetType = streetType;
+        this.street = street;
+        int n = Integer.parseInt(number);
+        this.number = n;
+        int c = Integer.parseInt(cep);
+        this.cep = c;
         this.complemento = complemento;
     }
 
@@ -102,5 +117,4 @@ public class Address {
         return complemento;
     }
 
-    
 }
