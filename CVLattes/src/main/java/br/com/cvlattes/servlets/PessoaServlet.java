@@ -6,6 +6,7 @@
 package br.com.cvlattes.servlets;
 
 import br.com.cvlattes.bin.CalendarioHelper;
+import br.com.cvlattes.controller.LoggableController;
 import br.com.cvlattes.model.Credential;
 import br.com.cvlattes.model.Person;
 import br.com.cvlattes.model.PersonName;
@@ -45,6 +46,8 @@ public class PessoaServlet extends HttpServlet {
     Credential credential;
     PersonName name;
     Person person;
+    String email;
+    LoggableController controller;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -80,7 +83,7 @@ public class PessoaServlet extends HttpServlet {
 //        
 
         name = new PersonName(request.getParameter("firstName"), request.getParameter("middleName"), request.getParameter("lastName"));
-//    email
+        email = request.getParameter("email");
         credential = new Credential(request.getParameter("cpf"), request.getParameter("password"));
 //    datas
 //tipo
@@ -90,8 +93,14 @@ public class PessoaServlet extends HttpServlet {
 
         AddressType.valueOf(request.getParameter("tipoEnd"));
 
-        address = new Address(CalendarioHelper.parseDate(request.getParameter("dataInitEnd")), CalendarioHelper.parseDate(request.getParameter("dataFinEnd")), AddressType.valueOf(request.getParameter("tipoEnd")), city, AddressType.valueOf(request.getParameter("tipoLog")), request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
+        address = new Address(CalendarioHelper.parseDate(request.getParameter("dataInitEnd")), CalendarioHelper.parseDate(request.getParameter("dataFinEnd")), AddressType.valueOf(request.getParameter("tipoEnd")), city, StreetType.valueOf(request.getParameter("tipoLog")), request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
 
+        person = new Person(name, credential);
+        person.setEmail(email);
+        person.addAddress(address);
+        
+        
+        controller.add(person);
     }
 
     /**

@@ -49,6 +49,10 @@ public class Address {
         this.complemento = complemento;
     }
 
+    public Address() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }

@@ -5,10 +5,12 @@
  */
 package br.com.cvlattes.persistence;
 
+import br.com.cvlattes.model.Loggable;
+
 /**
  *
  * @author marco
  */
-public class LoggablePersistence {
+public class LoggablePersistence extends SerializePersistence<Loggable>{
     
 }

@@ -5,31 +5,31 @@
  */
 package br.com.cvlattes.model;
 
-import java.util.Collection;
 import br.com.cvlattes.model.adress.Address;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author marco
  */
-public abstract class User extends Loggable{
+public abstract class User extends Loggable {
 
     private Name name;
     private String email;
-    private Collection<Address> address;
+    private List<Address> address;
 
     public User(Name name, Credential credential) {
         super(credential);
         this.name = name;
-    }
-    
-    
-    public User(String nameStr, Credential credential) {
-        super(credential);
-        
-        //implementar this.name = nameStr;
+        this.address = new ArrayList<Address>();
     }
 
+    public User(String nameStr, Credential credential) {
+        super(credential);
+
+        //implementar this.name = nameStr;
+    }
 
     public Name getName() {
         return name;
@@ -44,7 +44,8 @@ public abstract class User extends Loggable{
     }
 
     public void addAddress(Address address) {
-
+//        Tratar duplicatas
+        this.address.add(address);
     }
 
     public void downloadDocument(Document document) {

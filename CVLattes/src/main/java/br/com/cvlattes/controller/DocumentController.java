@@ -5,10 +5,17 @@
  */
 package br.com.cvlattes.controller;
 
+import br.com.cvlattes.model.Document;
+import br.com.cvlattes.persistence.Persistence;
+
 /**
  *
  * @author marco
  */
-public class DocumentController {
+public class DocumentController extends Controller<Document>{
+    
+    public DocumentController(Persistence<Document> persistence) {
+        super(persistence);
+    }
     
 }

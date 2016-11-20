@@ -5,11 +5,19 @@
  */
 package br.com.cvlattes.persistence;
 
+import java.util.List;
+
 /**
  *
  * @author marco
  * @param <T>
  */
-public class Persistence<T> {
-    
+public interface Persistence<T>{
+
+    public List<T> list();
+    public void create(T t );
+    public T retrive(T t);
+    public void update(T t );
+    public void delete(T t );
+
 }
