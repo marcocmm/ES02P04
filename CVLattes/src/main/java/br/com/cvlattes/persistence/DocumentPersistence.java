@@ -5,10 +5,13 @@
  */
 package br.com.cvlattes.persistence;
 
+import br.com.cvlattes.model.Document;
+
 /**
  *
  * @author marco
  */
-public class DocumentPersistence {
+public class DocumentPersistence extends SerializePersistence<Document>{
     
 }
+

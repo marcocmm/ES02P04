@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.cvlattes.controller;
-
-import br.com.cvlattes.model.Document;
+package br.com.cvlattes.controller.exception;
 
 /**
  *
  * @author marco
  */
-public class DocumentController extends Controller<Document>{
+public class ItemNotFoundException extends Exception {
 
-    public DocumentController() {
-        super(null);
+    public ItemNotFoundException() {
     }
 
-    
+    public ItemNotFoundException(String message) {
+        super(message);
+    }
 
-    
 }

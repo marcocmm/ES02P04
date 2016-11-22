@@ -5,6 +5,7 @@
  */
 package br.com.cvlattes.persistence;
 
+import br.com.cvlattes.controller.exception.ItemNotFoundException;
 import java.util.List;
 
 /**
@@ -14,10 +15,15 @@ import java.util.List;
  */
 public interface Persistence<T>{
 
+    
     public List<T> list();
-    public void create(T t );
-    public T retrive(T t);
-    public void update(T t );
-    public void delete(T t );
+
+    public void create(T t);
+
+    public T retrieve(T t) throws ItemNotFoundException;
+
+    public void update(T t) throws ItemNotFoundException;
+
+    public void delete(T t) throws ItemNotFoundException;
 
 }

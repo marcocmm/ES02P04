@@ -16,7 +16,9 @@ import br.com.cvlattes.model.adress.City;
 import br.com.cvlattes.model.adress.Country;
 import br.com.cvlattes.model.adress.State;
 import br.com.cvlattes.model.adress.StreetType;
+import br.com.cvlattes.persistence.LoggablePersistence;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,7 +49,12 @@ public class PessoaServlet extends HttpServlet {
     PersonName name;
     Person person;
     String email;
-    LoggableController controller;
+    LoggableController loggalbeController;
+    Date dataInicial;
+    Date dataFinal;
+    AddressType addressType;
+    StreetType streetType;
+    LoggablePersistence loggablePersistence;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -91,16 +98,22 @@ public class PessoaServlet extends HttpServlet {
         state = new State(request.getParameter("state"), "", country);
         city = new City(request.getParameter("city"), state);
 
-        AddressType.valueOf(request.getParameter("tipoEnd"));
-
-        address = new Address(CalendarioHelper.parseDate(request.getParameter("dataInitEnd")), CalendarioHelper.parseDate(request.getParameter("dataFinEnd")), AddressType.valueOf(request.getParameter("tipoEnd")), city, StreetType.valueOf(request.getParameter("tipoLog")), request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
+        addressType = AddressType.valueOf("Trabalho");
+        streetType = StreetType.valueOf("Rua");
+        dataInicial = CalendarioHelper.parseDate(request.getParameter("dataInitEnd"));
+        dataFinal = CalendarioHelper.parseDate(request.getParameter("dataFinEnd"));
+        
+        
+        address = new Address(dataInicial, dataFinal, addressType, city, streetType, request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
 
         person = new Person(name, credential);
         person.setEmail(email);
         person.addAddress(address);
         
+        loggablePersistence = new LoggablePersistence();
+        loggalbeController = new LoggableController(loggablePersistence);
         
-        controller.add(person);
+        loggalbeController.add(person);
     }
 
     /**

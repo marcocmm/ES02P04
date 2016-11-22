@@ -5,6 +5,8 @@
  */
 package br.com.cvlattes.controller;
 
+import br.com.cvlattes.model.Loggable;
+import br.com.cvlattes.persistence.LoggablePersistence;
 import br.com.cvlattes.persistence.Persistence;
 import java.util.List;
 
@@ -14,20 +16,21 @@ import java.util.List;
  */
 public class Controller<T> {
 
-    Persistence<T> persistence;
+    Persistence persistence;
 
-    public Controller(Persistence<T> persistence) {
+    public Controller(LoggablePersistence persistence) {
         this.persistence = persistence;
     }
-    
-       
+
     public List<T> getItems() {
 
         return null;
     }
 
     public void add(T t) {
-
+        if (t instanceof Loggable) {
+            persistence.create((Loggable) t);
+        }
     }
 
     public void remove(T t) {

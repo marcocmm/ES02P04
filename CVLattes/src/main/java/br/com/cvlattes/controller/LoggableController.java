@@ -6,16 +6,21 @@
 package br.com.cvlattes.controller;
 
 import br.com.cvlattes.model.Loggable;
-import br.com.cvlattes.persistence.Persistence;
+import br.com.cvlattes.persistence.LoggablePersistence;
 
 /**
  *
  * @author marco
  */
-public class LoggableController extends Controller<Loggable>{
-    
-    public LoggableController(Persistence<Loggable> persistence) {
+public class LoggableController extends Controller<Loggable> {
+
+    public LoggableController(LoggablePersistence persistence) {
         super(persistence);
     }
-    
+
 }
+
+/**
+ *
+ * @param persistence
+ */
