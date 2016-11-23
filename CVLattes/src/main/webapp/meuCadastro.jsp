@@ -4,6 +4,7 @@
     Author     : marco
 --%>
 
+<%@page import="br.com.cvlattes.model.InstituteName"%>
 <%@page import="br.com.cvlattes.model.User"%>
 <%@page import="br.com.cvlattes.model.Moderator"%>
 <%@page import="br.com.cvlattes.model.Institute"%>
@@ -27,73 +28,81 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Meu Cadastro</title>
         <jsp:include page="header.jsp"></jsp:include>
-        <%
-            Loggable loggable = (Loggable) session.getAttribute("usuario");
-            Country country;
-            State state;
-            City city;
-            Address address;
-            Credential credential;
-            String identifier;
-            String password;
-            String email;
-            Date dataInicial;
-            Date dataFinal;
-            AddressType addressType;
-            StreetType streetType;
-            
-            User usuario;
 
-            if (loggable instanceof Moderator){
-                response.sendRedirect("index.jsp");
-            }
-            
-            if (loggable instanceof Person) {
-                PersonName name;
-                String firstName;
-                String middleName;
-                String lastName;
-
-                usuario = (Person) loggable;
-                name = (PersonName) usuario.getName();
-                firstName = name.getFirst();
-                middleName = name.getMiddle();
-                lastName = name.getLast();
-
-            } else {
-
-                usuario = (Institute) loggable;
-            }
-
-            email = usuario.getEmail();
-            credential = usuario.getCredential();
-            identifier = credential.getIdentifier();
-            password = credential.getPassword();
-            
-            LoggableController loggalbeController;
+        </head>
+        <body>
 
 
-        %>
+            <form class="form" method="post" action="Pessoa.do">
+                <p>Meu Cadastro</p>
 
-    </head>
-    <body>
+            <%
+                Loggable loggable = (Loggable) session.getAttribute("usuario");
+                Country country;
+                State state;
+                City city;
+                Address address;
+                Credential credential;
+                String identifier;
+                String password;
+                String email;
+                Date dataInicial;
+                Date dataFinal;
+                AddressType addressType;
+                StreetType streetType;
+
+                User usuario;
+
+                if (loggable instanceof Moderator) {
+                    response.sendRedirect("index.jsp");
+                }
+
+                if (loggable instanceof Person) {
+                    PersonName name;
+                    String firstName;
+                    String middleName;
+                    String lastName;
+
+                    usuario = (Person) loggable;
+                    name = (PersonName) usuario.getName();
+                    firstName = name.getFirst();
+                    middleName = name.getMiddle();
+                    lastName = name.getLast();
+
+                    System.out.println("<div class=\"form-group\">"
+                            + "<label for=\"firstName\">Primeiro Nome</label>"
+                            + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"firstName\" value=" + firstName + " maxlength=\"50\" required=\"yes\"/>"
+                            + "</div>"
+                            + "<div class=\"form-group\">"
+                            + "<label for=\"middleName\">Primeiro Nome</label>"
+                            + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"middleName\" value=" + middleName + " maxlength=\"50\" required=\"yes\"/>"
+                            + "</div>"
+                            + "<div class=\"form-group\">"
+                            + "<label for=\"lastName\">Primeiro Nome</label>"
+                            + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"lastName\" value=" + lastName + " maxlength=\"50\" required=\"yes\"/>"
+                            + "</div>"
+                            + "");
+
+                } else {
+                    String name;
+                    usuario = (Institute) loggable;
+                    name = ((InstituteName) usuario.getName()).toString();
+                    System.out.println("<div class=\"form-group\">"
+                            + "<label for=\"name\">Primeiro Nome</label>"
+                            + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"name\" value=" + name + " maxlength=\"50\" required=\"yes\"/>"
+                            + "</div>");
+                }
+
+                email = usuario.getEmail();
+                credential = usuario.getCredential();
+                identifier = credential.getIdentifier();
+                password = credential.getPassword();
+
+                LoggableController loggalbeController;
 
 
-        <form class="form" method="post" action="Pessoa.do">
-            <p>Meu Cadastro</p>
-            <% %>
-            <div class="form-group">
-                <label for="firstName">Primeiro Nome</label>
-                <input type="text" class="form-control" id="nome" name="firstName" value="<%=firstName%>" maxlength="50" required="yes"/>
-            </div>
-            <div class="form-group">
-                <label for="middleName">Sobrenome</label>
-                <input type="text" class="form-control" name="middleName" value="<%=middleName%>" maxlength="50"  />
-            </div>
-            <div class="form-group">
-                <label for="lastName">Ultimo nome</label>
-                <input type="text" class="form-control" name="lastName" value="<%=lastName%>" maxlength="50" required="yes" />
-            </div>
+            %>
+
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" placeholder="email" name="email" value="<%=email%>"   />
