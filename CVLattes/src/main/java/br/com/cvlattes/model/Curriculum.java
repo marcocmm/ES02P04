@@ -5,6 +5,7 @@
  */
 package br.com.cvlattes.model;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  *
  * @author marco
  */
-public class Curriculum {
+public class Curriculum implements Serializable{
  private Person user;
     Collection<Document> documents;
     Collection<LanguageProficiency> languages;

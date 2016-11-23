@@ -41,38 +41,25 @@ public class PessoaServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    Country country;
-    State state;
-    City city;
-    Address address;
-    Credential credential;
-    PersonName name;
-    Person person;
-    String email;
-    LoggableController loggalbeController;
-    Date dataInicial;
-    Date dataFinal;
-    AddressType addressType;
-    StreetType streetType;
-    LoggablePersistence loggablePersistence;
+    private Country country;
+    private State state;
+    private City city;
+    private Address address;
+    private Credential credential;
+    private PersonName name;
+    private Person person;
+    private String email;
+    private LoggableController loggalbeController;
+    private Date dataInicial;
+    private Date dataFinal;
+    private AddressType addressType;
+    private StreetType streetType;
+    private LoggablePersistence loggablePersistence;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
 
         name = new PersonName(request.getParameter("firstName"), request.getParameter("middleName"), request.getParameter("lastName"));
         email = request.getParameter("email");
@@ -87,31 +74,19 @@ public class PessoaServlet extends HttpServlet {
         streetType = StreetType.valueOf("Rua");
         dataInicial = CalendarioHelper.parseDate(request.getParameter("dataInitEnd"));
         dataFinal = CalendarioHelper.parseDate(request.getParameter("dataFinEnd"));
-        
-        
+
         address = new Address(dataInicial, dataFinal, addressType, city, streetType, request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
 
         person = new Person(name, credential);
         person.setEmail(email);
         person.addAddress(address);
-        
+
         loggablePersistence = new LoggablePersistence();
         loggalbeController = new LoggableController(loggablePersistence);
-        
+
         loggalbeController.add(person);
-        
-        
+
         response.sendRedirect("meuCadastro.jsp");
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

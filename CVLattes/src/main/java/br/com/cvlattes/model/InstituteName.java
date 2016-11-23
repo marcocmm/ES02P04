@@ -5,11 +5,13 @@
  */
 package br.com.cvlattes.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marco
  */
-public class InstituteName extends Name {
+public class InstituteName extends Name implements Serializable {
 
     private String name;
 

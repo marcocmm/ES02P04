@@ -4,6 +4,9 @@
     Author     : marco
 --%>
 
+<%@page import="br.com.cvlattes.model.PersonName"%>
+<%@page import="br.com.cvlattes.model.Person"%>
+<%@page import="br.com.cvlattes.model.Loggable"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,6 +14,13 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Meu Cadastro</title>
         <jsp:include page="header.jsp"></jsp:include>
+        <%
+            Person usuario;
+            PersonName name;
+            
+            usuario = (Person) session.getAttribute("person");
+            name = (PersonName)usuario.getName();
+        %>
 
     </head>
     <body>
@@ -20,15 +30,15 @@
             <p>Meu Cadastro</p>
             <div class="form-group">
                 <label for="firstName">Primeiro Nome</label>
-                <input type="text" class="form-control" placeholder="Primeiro Nome" id="nome" name="firstName" value="" maxlength="50" required="yes"/>
+                <input type="text" class="form-control" placeholder="<%name.getFirst();%>" id="nome" name="firstName" value="<%name.getFirst();%>" maxlength="50" required="yes"/>
             </div>
             <div class="form-group">
                 <label for="middleName">Sobrenome</label>
-                <input type="text" class="form-control" placeholder="Sobrenome" name="middleName" value="" maxlength="50"  />
+                <input type="text" class="form-control" placeholder="Sobrenome" name="middleName" value="<%((PersonName)usuario.getName()).getMiddle();%>" maxlength="50"  />
             </div>
             <div class="form-group">
                 <label for="lastName">Ultimo nome</label>
-                <input type="text" class="form-control" placeholder="Ultimo Nome" name="lastName" value="" maxlength="50" required="yes" />
+                <input type="text" class="form-control" placeholder="Ultimo Nome" name="lastName" value="<%((PersonName)usuario.getName()).getLast();%>" maxlength="50" required="yes" />
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

@@ -4,6 +4,7 @@
     Author     : marco
 --%>
 
+<%@page import="br.com.cvlattes.model.Loggable"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,7 @@
             <h1>Bem vindo!</h1>
         </div>
 
-        <form class="form" method="post" action="">
+        <form class="form" method="post" action="Login.get">
             <div class="form-group">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" placeholder="Login" name="login" value="" maxlength="50"   />

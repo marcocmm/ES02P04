@@ -5,11 +5,13 @@
  */
 package br.com.cvlattes.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marco
  */
-public class Credential {
+public class Credential implements Serializable{
     private String identifier;
     private String password;
 
@@ -20,7 +22,9 @@ public class Credential {
 
     @Override
     public boolean equals(Object obj) {
-        
+        if (obj instanceof Credential){
+            return ((Credential) obj).getIdentifier().equals(identifier);
+        }
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
     }
 

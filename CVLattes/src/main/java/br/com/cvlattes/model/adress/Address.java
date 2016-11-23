@@ -5,13 +5,14 @@
  */
 package br.com.cvlattes.model.adress;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author marco
  */
-public class Address {
+public class Address implements Serializable{
 
     private Date initialDate;
     private Date finalDate;

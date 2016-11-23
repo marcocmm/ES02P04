@@ -13,6 +13,14 @@
         <servlet-name>Pessoa</servlet-name>
         <url-pattern>/Pessoa.do</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>br.com.cvlattes.servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login.get</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>

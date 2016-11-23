@@ -5,13 +5,14 @@
  */
 package br.com.cvlattes.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  *
  * @author marco
  */
-public class LanguageProficiency {
+public class LanguageProficiency implements Serializable{
     Language language;
     Map<Skill, Level> skillHasLevel;
 

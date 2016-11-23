@@ -11,16 +11,18 @@ import java.io.Serializable;
  *
  * @author marco
  */
-public abstract class Loggable implements Serializable{
+public abstract class Loggable implements Serializable {
+
     private Credential credential;
 
     public Loggable(Credential credential) {
         this.credential = credential;
     }
-    
-    public void login(){
+
+    public void login() {
     }
-    public void logout(){
+
+    public void logout() {
     }
 
     protected Credential getCredential() {
@@ -29,8 +31,10 @@ public abstract class Loggable implements Serializable{
 
     @Override
     public boolean equals(Object obj) {
+        if (obj instanceof Loggable) {
+            return credential.equals(((Loggable) obj).getCredential());
+        }
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

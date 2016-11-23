@@ -6,13 +6,13 @@
 package br.com.cvlattes.persistence;
 
 import br.com.cvlattes.controller.exception.ItemNotFoundException;
-import java.util.List;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -21,10 +21,21 @@ import java.util.logging.Logger;
  */
 public class SerializePersistence<T> implements Persistence<T>{
 
-    private List<T> items;
+ /**
+     * Colecao de itens que serao manipulados.
+     */
+    private Collection<T> items;
 
+    /**
+     * Local padrao para serializaçao da coleçao.
+     */
+    private static final String DB_URL = "/dados/Documents/BCC/ES2/ES02P04/CVLattes/database";
+
+    /**
+     * Constroi a persistencia resgatando as infomaçoes ja existentes.
+     */
     public SerializePersistence() {
-        List<T> items;
+        Collection<T> items;
         try {
             items = deserialize();
         } catch (IOException | ClassNotFoundException ex) {
@@ -38,25 +49,46 @@ public class SerializePersistence<T> implements Persistence<T>{
         this.items = items;
     }
 
-    private synchronized void serialize(List<T> items) throws IOException {
-        FileOutputStream fileOutputStream = new FileOutputStream("/dados/Documents/BCC/ES2/ES02P04/CVLattes/database");
-        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-        objectOutputStream.writeObject(items);
-        objectOutputStream.close();
-        fileOutputStream.close();
+    /**
+     * Grava os dados no disco.
+     *
+     * @param items Coleçao de itens que serao persistidos.
+     * @throws IOException
+     */
+    private final void serialize(Collection<T> items) throws IOException {
+        synchronized (SerializePersistence.class) {
+            FileOutputStream fileOutputStream = new FileOutputStream(DB_URL);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(items);
+            objectOutputStream.close();
+            fileOutputStream.close();
+        }
     }
 
-    private synchronized List<T> deserialize() throws IOException, ClassNotFoundException {
-        FileInputStream fileInputStream = new FileInputStream("/dados/Documents/BCC/ES2/ES02P04/CVLattes/database");
+    /**
+     * Resgata os dados do disco.
+     *
+     * @return Retorna a coleçao dos items obtidos.
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    private final Collection<T> deserialize() throws IOException, ClassNotFoundException {
+        FileInputStream fileInputStream = new FileInputStream(DB_URL);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        List<T> items = (List<T>) objectInputStream.readObject();
+        Collection<T> items = (Collection<T>) objectInputStream.readObject();
         objectInputStream.close();
         fileInputStream.close();
         return items;
     }
 
+    /**
+     * Obtem todos os itens existentes na base. Metodo com lock exclusivo para a
+     * mesma instancia.
+     *
+     * @return
+     */
     @Override
-    public synchronized List<T> list() {
+    public final Collection<T> list() {
         try {
             items = deserialize();
         } catch (IOException ex) {
@@ -67,21 +99,35 @@ public class SerializePersistence<T> implements Persistence<T>{
         return items;
     }
 
+    /**
+     * Insere um item na base.
+     *
+     * @param t
+     */
     @Override
-    public synchronized void create(T t) {
-        try {
-            items = deserialize();
-            items.add(t);
-            serialize(items);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
+    public final void create(T t) {
+        synchronized (SerializePersistence.class) {
+            try {
+                items = deserialize();
+                items.add(t);
+                serialize(items);
+            } catch (IOException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
+    /**
+     * Obtem um item na base.
+     *
+     * @param t
+     * @return
+     * @throws ItemNotFoundException
+     */
     @Override
-    public synchronized T retrieve(T t) throws ItemNotFoundException {
+    public final T retrieve(T t) throws ItemNotFoundException {
         try {
             items = deserialize();
             for (T item : items) {
@@ -97,36 +143,53 @@ public class SerializePersistence<T> implements Persistence<T>{
         throw new ItemNotFoundException("Item não encontrado");
     }
 
+    /**
+     * Atualiza um item buscando-o pela chave primaria. A chave primaria devera
+     * ser descrita no metodo equals de cada classe.
+     *
+     * @param t
+     * @throws ItemNotFoundException
+     */
     @Override
-    public synchronized void update(T t) throws ItemNotFoundException {
-        try {
-            items = deserialize();
-            boolean remove = this.items.remove(t);
-            if (!remove) {
-                throw new ItemNotFoundException("Item não encontrado");
+    public final void update(T t) throws ItemNotFoundException {
+        synchronized (SerializePersistence.class) {
+            try {
+                items = deserialize();
+                boolean remove = this.items.remove(t);
+                if (!remove) {
+                    throw new ItemNotFoundException("Item não encontrado");
+                }
+                this.items.add(t);
+                serialize(items);
+            } catch (IOException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
             }
-            this.items.add(t);
-            serialize(items);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     * Remove um objeto.
+     *
+     * @param t
+     * @throws ItemNotFoundException
+     */
     @Override
-    public synchronized void delete(T t) throws ItemNotFoundException {
-        try {
-            items = deserialize();
-            boolean remove = this.items.remove(t);
-            if (!remove) {
-                throw new ItemNotFoundException("Item não encontrado");
+    public final void delete(T t) throws ItemNotFoundException {
+        synchronized (SerializePersistence.class) {
+            try {
+                items = deserialize();
+                boolean remove = this.items.remove(t);
+                if (!remove) {
+                    throw new ItemNotFoundException("Item não encontrado");
+                }
+                serialize(items);
+            } catch (IOException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
             }
-            serialize(items);
-        } catch (IOException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(SerializePersistence.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

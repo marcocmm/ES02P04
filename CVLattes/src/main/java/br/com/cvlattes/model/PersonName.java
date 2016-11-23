@@ -5,11 +5,13 @@
  */
 package br.com.cvlattes.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marco
  */
-public class PersonName extends Name {
+public class PersonName extends Name implements Serializable {
 
     private String last;
     private String middle;
@@ -36,6 +38,19 @@ public class PersonName extends Name {
         }
     }
 
+    public String getFirst() {
+        return first;
+    }
+
+    public String getMiddle() {
+        return middle;
+    }
+
+    public String getLast() {
+        return last;
+    }
+
+    
     @Override
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.

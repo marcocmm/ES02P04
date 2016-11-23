@@ -5,11 +5,13 @@
  */
 package br.com.cvlattes.model.adress;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marco
  */
-public class State {
+public class State implements Serializable {
     private String name;
     private String abbreviation;
     private Country country;

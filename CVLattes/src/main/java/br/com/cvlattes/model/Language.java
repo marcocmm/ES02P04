@@ -6,12 +6,13 @@
 package br.com.cvlattes.model;
 
 import br.com.cvlattes.model.adress.Country;
+import java.io.Serializable;
 
 /**
  *
  * @author marco
  */
-public class Language {
+public class Language implements Serializable {
     private String language;
     private Country country;
     private String abbreviation;
