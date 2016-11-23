@@ -25,7 +25,7 @@ public abstract class Loggable implements Serializable {
     public void logout() {
     }
 
-    protected Credential getCredential() {
+    public Credential getCredential() {
         return credential;
     }
 

@@ -58,13 +58,13 @@ public class LoginServlet extends HttpServlet {
             loggable = loggableController.login(credential);
             if (loggable instanceof Person) {
                 person = (Person) loggable;
-                session.setAttribute("person", person);
+                session.setAttribute("usuario", person);
             } else if (loggable instanceof Institute) {
                 institute = (Institute) loggable;
-                session.setAttribute("institute", institute);
+                session.setAttribute("usuario", institute);
             } else if (loggable instanceof Moderator) {
                 moderator = (Moderator) loggable;
-                session.setAttribute("moderator", moderator);
+                session.setAttribute("usuario", moderator);
             }
         } catch (ItemNotFoundException ex) {
             response.sendRedirect("index.jsp");

@@ -4,6 +4,19 @@
     Author     : marco
 --%>
 
+<%@page import="br.com.cvlattes.model.User"%>
+<%@page import="br.com.cvlattes.model.Moderator"%>
+<%@page import="br.com.cvlattes.model.Institute"%>
+<%@page import="br.com.cvlattes.model.adress.AddressType"%>
+<%@page import="br.com.cvlattes.model.adress.StreetType"%>
+<%@page import="br.com.cvlattes.controller.LoggableController"%>
+<%@page import="java.util.Date"%>
+<%@page import="br.com.cvlattes.controller.LoggableController"%>
+<%@page import="br.com.cvlattes.model.Credential"%>
+<%@page import="br.com.cvlattes.model.adress.City"%>
+<%@page import="br.com.cvlattes.model.adress.Address"%>
+<%@page import="br.com.cvlattes.model.adress.State"%>
+<%@page import="br.com.cvlattes.model.adress.Country"%>
 <%@page import="br.com.cvlattes.model.PersonName"%>
 <%@page import="br.com.cvlattes.model.Person"%>
 <%@page import="br.com.cvlattes.model.Loggable"%>
@@ -15,11 +28,51 @@
         <title>Meu Cadastro</title>
         <jsp:include page="header.jsp"></jsp:include>
         <%
-            Person usuario;
-            PersonName name;
+            Loggable loggable = (Loggable) session.getAttribute("usuario");
+            Country country;
+            State state;
+            City city;
+            Address address;
+            Credential credential;
+            String identifier;
+            String password;
+            String email;
+            Date dataInicial;
+            Date dataFinal;
+            AddressType addressType;
+            StreetType streetType;
             
-            usuario = (Person) session.getAttribute("person");
-            name = (PersonName)usuario.getName();
+            User usuario;
+
+            if (loggable instanceof Moderator){
+                response.sendRedirect("index.jsp");
+            }
+            
+            if (loggable instanceof Person) {
+                PersonName name;
+                String firstName;
+                String middleName;
+                String lastName;
+
+                usuario = (Person) loggable;
+                name = (PersonName) usuario.getName();
+                firstName = name.getFirst();
+                middleName = name.getMiddle();
+                lastName = name.getLast();
+
+            } else {
+
+                usuario = (Institute) loggable;
+            }
+
+            email = usuario.getEmail();
+            credential = usuario.getCredential();
+            identifier = credential.getIdentifier();
+            password = credential.getPassword();
+            
+            LoggableController loggalbeController;
+
+
         %>
 
     </head>
@@ -28,25 +81,26 @@
 
         <form class="form" method="post" action="Pessoa.do">
             <p>Meu Cadastro</p>
+            <% %>
             <div class="form-group">
                 <label for="firstName">Primeiro Nome</label>
-                <input type="text" class="form-control" placeholder="<%name.getFirst();%>" id="nome" name="firstName" value="<%name.getFirst();%>" maxlength="50" required="yes"/>
+                <input type="text" class="form-control" id="nome" name="firstName" value="<%=firstName%>" maxlength="50" required="yes"/>
             </div>
             <div class="form-group">
                 <label for="middleName">Sobrenome</label>
-                <input type="text" class="form-control" placeholder="Sobrenome" name="middleName" value="<%((PersonName)usuario.getName()).getMiddle();%>" maxlength="50"  />
+                <input type="text" class="form-control" name="middleName" value="<%=middleName%>" maxlength="50"  />
             </div>
             <div class="form-group">
                 <label for="lastName">Ultimo nome</label>
-                <input type="text" class="form-control" placeholder="Ultimo Nome" name="lastName" value="<%((PersonName)usuario.getName()).getLast();%>" maxlength="50" required="yes" />
+                <input type="text" class="form-control" name="lastName" value="<%=lastName%>" maxlength="50" required="yes" />
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" placeholder="email" name="email" value=""   />
+                <input type="text" class="form-control" placeholder="email" name="email" value="<%=email%>"   />
             </div>
             <div class="form-group">
                 <label for="cpf">CPF</label>
-                <input type="text" class="form-control" placeholder="CPF" name="cpf" value="" maxlength="50"   />
+                <input type="text" class="form-control" placeholder="identifier" name="identifier" value="" maxlength="50"   />
             </div>
             <div class="form-group">
                 <label for="password">Senha</label>
