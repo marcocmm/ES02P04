@@ -72,22 +72,7 @@ public class PessoaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        
-//        doador.setNomeMae(request.getParameter("nomeMae"));
-//        
-//        switch (request.getParameter("genero")) {
-//            case "masculino":
-//                doador.setSexo(Sexo.MASCULINO);
-//            case "feminino":
-//                doador.setSexo(Sexo.FEMENINO);
-//            case "outro":
-//                doador.setSexo(Sexo.OUTRO);
-//        }
-//        
-//        doador.setDataNasc(CalendarioHelper.parseDate(request.getParameter("dataNasc")));
-//        
-//        doador.setProfissao(request.getParameter("profissao"));
-//        
+        
 
         name = new PersonName(request.getParameter("firstName"), request.getParameter("middleName"), request.getParameter("lastName"));
         email = request.getParameter("email");
@@ -114,6 +99,9 @@ public class PessoaServlet extends HttpServlet {
         loggalbeController = new LoggableController(loggablePersistence);
         
         loggalbeController.add(person);
+        
+        
+        response.sendRedirect("meuCadastro.jsp");
     }
 
     /**

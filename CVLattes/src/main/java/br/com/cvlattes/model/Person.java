@@ -5,8 +5,6 @@
  */
 package br.com.cvlattes.model;
 
-import java.util.Collection;
-
 /**
  *
  * @author marco
@@ -17,14 +15,11 @@ public class Person extends User {
 
     public Person(PersonName name, Credential credential) {
         super(name, credential);
-
     }
 
     public Person(String name, Credential credential) {
         super(name, credential);
-        
         //implementar name
-
     }
 
     public String getCPF() {

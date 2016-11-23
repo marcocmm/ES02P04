@@ -17,11 +17,14 @@
 
     <nav id="cssmenu">
         <ul>
-            <li><a href="consultarCurriculo">Consultar Curriculo</a>
+            <li><a href="index.jsp">Home</a></li>
+            <li><a href="consultarCurriculo">Consultar Curriculo</a></li>
+            <li><a href="meuCadastro.jsp">Meu Cadastro</a></li>
+
             <li><a class="active" href="#">Cadastro</a>
                 <ul>
                     <li><a href="cadastroPessoa.jsp">Cadastrar Pessoa</a></li>
-                    <li><a href="cadastroInstituicao">Cadastrar Instituição</a>
+                    <li><a href="cadastroInstituicao.jsp">Cadastrar Instituição</a>
 
                 </ul>
             </li>

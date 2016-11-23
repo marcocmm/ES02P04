@@ -7,6 +7,7 @@ package br.com.cvlattes.model;
 
 import br.com.cvlattes.model.adress.Address;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public abstract class User extends Loggable {
 
     private Name name;
     private String email;
-    private List<Address> address;
+    private Collection<Address> address;
 
     public User(Name name, Credential credential) {
         super(credential);
@@ -46,6 +47,10 @@ public abstract class User extends Loggable {
     public void addAddress(Address address) {
 //        Tratar duplicatas
         this.address.add(address);
+    }
+
+    public Collection<Address> getAddress() {
+        return address;
     }
 
     public void downloadDocument(Document document) {
