@@ -41,4 +41,12 @@ public class Curriculum implements Serializable {
         ((ArrayList<LanguageProficiency>) languages).add(language);
     }
 
+    public Collection<Document> getDocuments() {
+        return documents;
+    }
+
+    public Collection<LanguageProficiency> getLanguages() {
+        return languages;
+    }
+    
 }

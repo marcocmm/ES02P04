@@ -21,6 +21,10 @@
         <servlet-name>Language</servlet-name>
         <servlet-class>br.com.cvlattes.servlets.LanguageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Document</servlet-name>
+        <servlet-class>br.com.cvlattes.servlets.DocumentServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>Pessoa</servlet-name>
@@ -38,10 +42,14 @@
         <servlet-name>Language</servlet-name>
         <url-pattern>/Language.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Document</servlet-name>
+        <url-pattern>/Document.do</url-pattern>
+    </servlet-mapping>
     
     <session-config>
         <session-timeout>
-            30
+            300
         </session-timeout>
     </session-config>
 </web-app>

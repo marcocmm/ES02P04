@@ -50,7 +50,7 @@ public class LanguageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         session = request.getSession();
-        person = (Person) session.getAttribute("    ");
+        person = (Person) session.getAttribute("person");
 
         country = new Country((String) request.getAttribute("pais"), "");
         language = new Language();
@@ -86,6 +86,9 @@ public class LanguageServlet extends HttpServlet {
         } catch (ItemNotFoundException ex) {
             Logger.getLogger(LanguageServlet.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        session.setAttribute("person", person);
+
+        response.sendRedirect("meuCurriculo.jsp");
 
     }
 }

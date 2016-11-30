@@ -18,7 +18,7 @@ public class LanguageProficiency implements Serializable{
 
     public LanguageProficiency(Language language, Map<Skill,Level> skills) {
         this.language = language;
-        this.skillHasLevel = skillHasLevel;
+        this.skillHasLevel = skills;
     }
 
     public Language getLanguage() {

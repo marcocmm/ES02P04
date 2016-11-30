@@ -15,13 +15,14 @@ public class Person extends User {
 
     public Person(PersonName name, Credential credential) {
         super(name, credential);
-        curriculum = new Curriculum(this);
+        this.curriculum = new Curriculum(this);
     }
 
-    public Person(String name, Credential credential) {
-        super(name, credential);
-        //implementar name
-    }
+//    public Person(String name, Credential credential) {
+//        super(name, credential);
+//        this.curriculum = new Curriculum(this);
+//        //implementar name
+//    }
 
     public void setCurriculum(Curriculum curriculum) {
         this.curriculum = curriculum;
@@ -35,7 +36,7 @@ public class Person extends User {
     }
 
     public Curriculum getCurriculum() {
-        return curriculum;
+        return this.curriculum;
     }
 
     public Document getDocument(Document document) {

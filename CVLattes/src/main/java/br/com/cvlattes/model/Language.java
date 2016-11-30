@@ -18,16 +18,20 @@ public class Language implements Serializable {
     private Country country;
     private String abbreviation;
 
+    public Language() {
+        this.abbreviation = "";
+    }
+
     public void setLanguage(String language) {
         this.language = language;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public String getLanguage() {
+        return language;
     }
 
-    public Language() {
-        this.abbreviation = "";
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override
