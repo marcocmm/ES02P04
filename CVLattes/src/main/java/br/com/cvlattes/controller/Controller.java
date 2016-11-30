@@ -7,6 +7,7 @@ package br.com.cvlattes.controller;
 
 import br.com.cvlattes.controller.exception.ItemNotFoundException;
 import br.com.cvlattes.persistence.Persistence;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,9 +22,9 @@ public class Controller<T> {
         this.persistence = persistence;
     }
 
-    public List<T> getItems() {
-
-        return null;
+    public Collection<T> getItems() {
+        
+        return persistence.list();
     }
 
     /**

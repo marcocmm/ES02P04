@@ -24,4 +24,8 @@ public class InstituteName extends Name implements Serializable {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

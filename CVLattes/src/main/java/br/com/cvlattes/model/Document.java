@@ -17,10 +17,10 @@ public class Document implements Serializable{
     private Map<Person,Role> authorHasRole;
     private String title;
     private int year;
-    Institute institute;
-    Collection<String> keywords;
-    String researchArea;
-    Language language;
+    private Institute institute;
+    private Collection<String> keywords;
+    private String researchArea;
+    private Language language;
 
     public Document(Map<Person, Role> authorHasRole, String title, int year, Language language) {
         this.authorHasRole = authorHasRole;
@@ -28,6 +28,43 @@ public class Document implements Serializable{
         this.year = year;
         this.language = language;
     }
+
+    public void setInstitute(Institute institute) {
+        this.institute = institute;
+    }
+
+    public void setKeywords(Collection<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    public void setResearchArea(String researchArea) {
+        this.researchArea = researchArea;
+    }
+
+    public Institute getInstitute() {
+        return institute;
+    }
+
+    public Collection<String> getKeywords() {
+        return keywords;
+    }
+
+    public String getResearchArea() {
+        return researchArea;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+    
     
     
 }

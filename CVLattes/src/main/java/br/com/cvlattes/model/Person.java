@@ -5,6 +5,8 @@
  */
 package br.com.cvlattes.model;
 
+import java.util.Collection;
+
 /**
  *
  * @author marco
@@ -39,8 +41,8 @@ public class Person extends User {
         return this.curriculum;
     }
 
-    public Document getDocument(Document document) {
-        return document;
+    public Collection<Document> getDocuments() {
+        return this.curriculum.getDocuments();
     }
 
     public void updateDocument(Document document) {

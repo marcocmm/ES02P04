@@ -22,6 +22,7 @@ public class LoggableController extends Controller<Loggable> {
         super(persistence);
     }
 
+
     public Loggable login(Credential credential) throws ItemNotFoundException {
         loggable = new Loggable(credential) {
         };
