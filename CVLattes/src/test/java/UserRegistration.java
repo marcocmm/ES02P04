@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import br.com.cvlattes.controller.LoggableController;
+import br.com.cvlattes.controller.exception.ItemNotFoundException;
 import br.com.cvlattes.model.Credential;
 import br.com.cvlattes.model.Document;
 import br.com.cvlattes.model.Institute;
@@ -18,6 +20,7 @@ import br.com.cvlattes.model.adress.City;
 import br.com.cvlattes.model.adress.State;
 import br.com.cvlattes.model.adress.Country;
 import br.com.cvlattes.model.adress.StreetType;
+import br.com.cvlattes.persistence.LoggablePersistence;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +33,7 @@ import org.junit.Test;
  * @author marco
  */
 public class UserRegistration {
+
     Date d;
     Country country;
     State s;
@@ -39,11 +43,15 @@ public class UserRegistration {
     PersonName pn;
     String cpf;
     Person p;
+    Person pr;
     InstituteName in;
     String cnpj;
     Institute i;
     Language l;
     Document doc;
+    LoggablePersistence loggablePersistence;
+    LoggableController loggableController;
+
     public UserRegistration() {
         d = new Date(2016, 11, 22);
         country = new Country("Brasil", "BR");
@@ -60,21 +68,36 @@ public class UserRegistration {
 
         in = new InstituteName("UTFPR");
         cnpj = "22.369.258/0001-55";
-        i = new Institute(c, in);
+        i = new Institute(in, c);
 
         l = new Language();
         Map<Person, Role> m = new HashMap<Person, Role>() {
         };
 
         doc = new Document(m, "Trabalho", 2000, l);
+
+        loggablePersistence = new LoggablePersistence();
+        loggableController = new LoggableController(loggablePersistence);
+
     }
 
     @Test
-    public void instacias() {
+    public void instacias() throws ItemNotFoundException {
         p.addAddress(a);
         i.addAddress(a);
-        Assert.assertEquals(((ArrayList<Address>)p.getAddress()).get(0).getCity().getName(),"Campo Mourao");
+        Assert.assertEquals(((ArrayList<Address>) p.getAddress()).get(0).getCity().getName(), "Campo Mourao");
+        loggableController.add(p);
 
+        pr = (Person) loggableController.get(p);
+        Assert.assertEquals(p, pr);
+        Assert.assertEquals(((ArrayList<Address>) pr.getAddress()).get(0).getCity().getName(), "Campo Mourao");
+        loggableController.remove(p);
+        Assert.assertEquals(((ArrayList<Address>) pr.getAddress()).get(0).getCity().getName(), "Campo Mourao");
+        try {
+            pr = (Person) loggableController.get(p);
+        } catch (ItemNotFoundException e) {
+            System.out.println(e);
+        }
 //        i.getCNPJ().assert(cnpj);
     }
 

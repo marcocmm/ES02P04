@@ -4,6 +4,8 @@
     Author     : marco
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Enumeration"%>
 <%@page import="br.com.cvlattes.model.InstituteName"%>
 <%@page import="br.com.cvlattes.model.User"%>
 <%@page import="br.com.cvlattes.model.Moderator"%>
@@ -33,31 +35,31 @@
         <body>
 
 
-            <form class="form" method="post" action="Pessoa.do">
-                <p>Meu Cadastro</p>
 
-            <%
-                Loggable loggable = (Loggable) session.getAttribute("usuario");
-                Country country;
-                State state;
-                City city;
-                Address address;
-                Credential credential;
-                String identifier;
-                String password;
-                String email;
-                Date dataInicial;
-                Date dataFinal;
-                AddressType addressType;
-                StreetType streetType;
+        <%
+            Enumeration attributes = session.getAttributeNames();
+            String country = "";
+            String state = "";
+            String city = "";
+            Address address;
+            String street = "";
+            int number = 0;
+            int cep = 0;
+            String complemento = "";
+            String identifier = "";
+            String password = "";
+            Credential credential = new Credential(identifier, password);
+            String email = "";
+            String sessionType;
+            Loggable loggable = new Loggable(credential) {
+            };
+            while (attributes.hasMoreElements()) {
+                sessionType = (String) attributes.nextElement();
+                loggable = (Loggable) session.getAttribute(sessionType);
 
-                User usuario;
+                if (sessionType.equals("person")) {
+                    Person usuario = (Person) loggable;
 
-                if (loggable instanceof Moderator) {
-                    response.sendRedirect("index.jsp");
-                }
-
-                if (loggable instanceof Person) {
                     PersonName name;
                     String firstName;
                     String middleName;
@@ -69,101 +71,100 @@
                     middleName = name.getMiddle();
                     lastName = name.getLast();
 
-                    System.out.println("<div class=\"form-group\">"
+                    out.println("<form class=\"form\" method=\"post\" action=\"Pessoa.do\">"
+                            + "<p>Meu Cadastro</p>"
+                            + "<div class=\"form-group\">"
                             + "<label for=\"firstName\">Primeiro Nome</label>"
                             + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"firstName\" value=" + firstName + " maxlength=\"50\" required=\"yes\"/>"
                             + "</div>"
                             + "<div class=\"form-group\">"
-                            + "<label for=\"middleName\">Primeiro Nome</label>"
+                            + "<label for=\"middleName\">Nome do Meio</label>"
                             + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"middleName\" value=" + middleName + " maxlength=\"50\" required=\"yes\"/>"
                             + "</div>"
                             + "<div class=\"form-group\">"
-                            + "<label for=\"lastName\">Primeiro Nome</label>"
+                            + "<label for=\"lastName\">Ultimo Nome</label>"
                             + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"lastName\" value=" + lastName + " maxlength=\"50\" required=\"yes\"/>"
                             + "</div>"
                             + "");
-
-                } else {
+                    email = usuario.getEmail();
+                    address = ((ArrayList<Address>) usuario.getAddress()).get(0);
+                    city = address.getCity().getName();
+                    state = address.getCity().getState().getName();
+                    country = address.getCity().getState().getCountry().getName();
+                    street = address.getStreet();
+                    number = address.getNumber();
+                    cep = address.getCep();
+                    complemento = address.getComplemento();
+                } else if (sessionType.equals("person")) {
+                    Institute usuario;
                     String name;
                     usuario = (Institute) loggable;
                     name = ((InstituteName) usuario.getName()).toString();
-                    System.out.println("<div class=\"form-group\">"
-                            + "<label for=\"name\">Primeiro Nome</label>"
+                    System.out.println("<form class=\"form\" method=\"post\" action=\"Institute.do\">"
+                            + "<p>Meu Cadastro</p>"
+                            + "<div class=\"form-group\">"
+                            + "<label for=\"name\">Nome</label>"
                             + "<input type=\"text\" class=\"form-control\" id=\"nome\" name=\"name\" value=" + name + " maxlength=\"50\" required=\"yes\"/>"
                             + "</div>");
+                    email = usuario.getEmail();
+                    address = ((ArrayList<Address>) usuario.getAddress()).get(0);
+                    city = address.getCity().getName();
+                } else {
+                    response.sendRedirect("index.jsp");
                 }
+            }
 
-                email = usuario.getEmail();
-                credential = usuario.getCredential();
-                identifier = credential.getIdentifier();
-                password = credential.getPassword();
+            credential = loggable.getCredential();
+            identifier = credential.getIdentifier();
+            password = credential.getPassword();
+        %>
 
-                LoggableController loggalbeController;
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" placeholder="email" name="email" value="<%=email%>"  readonly="" />
+        </div>
+        <div class="form-group">
+            <label for="cpf">CPF: <%=identifier%></label>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" placeholder="Senha" name="password" value="<%=password%>" maxlength="50"  />
+        </div>
 
+        <div class="form-group">
+            <label for="city">Cidade:</label>
+            <input type="text" class="form-control" placeholder="Cidade" name="city" value="<%=city%>" maxlength="50"   />
+        </div>
+        <div class="form-group">
+            <label for="state">Estado:</label>
+            <input type="text" class="form-control" placeholder="Estado" name="state" value="<%=state%>" maxlength="50"   />
+        </div>
+        <div class="form-group">
+            <label for="country">Pais</label>
+            <input type="text" class="form-control" placeholder="Pais" name="country" value="<%=country%>" maxlength="50"   />
+        </div>
 
-            %>
+        <div class="form-group">
+            <label for="street">Logradouro:</label>
+            <input type="text" class="form-control" placeholder="Logradouro" name="street" value="<%=street%>" maxlength="50"   />
+        </div>
+        <div class="form-group">
+            <label for="number">Número</label>
+            <input type="text" class="form-control" placeholder="Numero" name="number" value="<%=number%>" maxlength="50"   />
+        </div>
+        <div class="form-group">
+            <label for="cep">CEP</label>
+            <input type="text" class="form-control" placeholder="CEP" name="cep" value="<%=cep%>" maxlength="50"   />
+        </div>
+        <div class="form-group">
+            <label for="complemento">Complemento</label>
+            <input type="text" class="form-control" placeholder="Complemento" name="complemento" value="<%=complemento%>" maxlength="50"   />
+        </div>
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="form-control" placeholder="email" name="email" value="<%=email%>"   />
-            </div>
-            <div class="form-group">
-                <label for="cpf">CPF</label>
-                <input type="text" class="form-control" placeholder="identifier" name="identifier" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="password">Senha</label>
-                <input type="text" class="form-control" placeholder="Senha" name="password" value="" maxlength="50"  />
-            </div>
-            <div class="form-group">
-                <label for="dataInitEnd">Data Inicial do Endereço</label>
-                <input type="date" class="form-control" name="dataInitEnd" value="" required=""  />
-            </div>
-            <div class="form-group">
-                <label for="dataFinEnd">Data Final do Endereço</label>
-                <input type="date" class="form-control" name="dataFinEnd" value=""  required="" />
-            </div>
-            <div class="form-group">
-                <label for="tipoEnd">Tipo de Endereço</label><br>
-                <input type="radio" name="Residencia" value="Residencia" checked=""> Residencia<br>
-                <input type="radio" name="Trabalho" value="Trabalho"> Trabalho<br>
-            </div>
-            <div class="form-group">
-                <label for="city">Cidade:</label>
-                <input type="text" class="form-control" placeholder="Cidade" name="city" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="state">Estado:</label>
-                <input type="text" class="form-control" placeholder="Estado" name="state" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="country">Pais</label>
-                <input type="text" class="form-control" placeholder="Pais" name="country" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="tipoLog">Tipo do Logradouro</label><br>
-                <input type="radio" name="Avenida" value="Avenida" checked=""> Avenida<br>
-                <input type="radio" name="Rua" value="Rua"> Rua<br>
-            </div>
-            <div class="form-group">
-                <label for="street">Logradouro:</label>
-                <input type="text" class="form-control" placeholder="Logradouro" name="street" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="number">Número</label>
-                <input type="text" class="form-control" placeholder="Numero" name="number" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="cep">CEP</label>
-                <input type="text" class="form-control" placeholder="CEP" name="cep" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="complemento">Complemento</label>
-                <input type="text" class="form-control" placeholder="Complemento" name="complemento" value="" maxlength="50"   />
-            </div>
-
-            <input class="btn btn-success" style="width: 100%" type="submit" id="submitData" value="Alterar"/>
-            <a href="index.jsp"> Cancelar </a> 
-        </form>
-    </body>
+        <input class="btn btn-success" style="width: 100%" type="submit" id="submitData" value="Alterar"/>
+        </br>
+        <a href="index.jsp"> Cancelar </a> 
+        </br>
+    </form>
+</body>
 </html>

@@ -58,19 +58,21 @@ public class LoginServlet extends HttpServlet {
             loggable = loggableController.login(credential);
             if (loggable instanceof Person) {
                 person = (Person) loggable;
-                session.setAttribute("usuario", person);
+                session.setAttribute("person", person);
+                response.sendRedirect("meuCadastro.jsp");
             } else if (loggable instanceof Institute) {
                 institute = (Institute) loggable;
-                session.setAttribute("usuario", institute);
+                session.setAttribute("intitute", institute);
+                response.sendRedirect("meuCadastro.jsp");
             } else if (loggable instanceof Moderator) {
                 moderator = (Moderator) loggable;
-                session.setAttribute("usuario", moderator);
+                session.setAttribute("moderator", moderator);
+                response.sendRedirect("meuCadastro.jsp");
             }
         } catch (ItemNotFoundException ex) {
             response.sendRedirect("index.jsp");
-            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-            response.sendRedirect("meuCadastro.jsp");
 
     }
 

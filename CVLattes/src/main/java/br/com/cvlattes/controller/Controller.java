@@ -5,7 +5,7 @@
  */
 package br.com.cvlattes.controller;
 
-import br.com.cvlattes.model.Loggable;
+import br.com.cvlattes.controller.exception.ItemNotFoundException;
 import br.com.cvlattes.persistence.LoggablePersistence;
 import br.com.cvlattes.persistence.Persistence;
 import java.util.List;
@@ -27,19 +27,30 @@ public class Controller<T> {
         return null;
     }
 
+    /**
+     * Salva um objeto do tipo T no disco
+     *
+     * @param t
+     */
     public void add(T t) {
-        if (t instanceof Loggable) {
-            persistence.create((Loggable) t);
-        }
+        persistence.create(t);
     }
 
-    public void remove(T t) {
+    /**
+     * Remove um objeto com a mesma credencial
+     *
+     * @param t
+     */
+    public void remove(T t) throws ItemNotFoundException {
+        persistence.delete(t);
     }
 
-    public void update(T t) {
+    public void update(T t) throws ItemNotFoundException {
+        persistence.update(t);
     }
 
-    public T get(T t) {
-        return null;
+    public T get(T t) throws ItemNotFoundException {
+        return (T) persistence.retrieve(t);
+
     }
 }

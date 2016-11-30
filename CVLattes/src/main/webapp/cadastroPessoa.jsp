@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro</title>
+        <title>Cadastro Pessoa</title>
         <jsp:include page="header.jsp"></jsp:include>
 
     </head>
@@ -40,19 +40,6 @@
                 <input type="text" class="form-control" placeholder="Senha" name="password" value="" maxlength="50"  />
             </div>
             <div class="form-group">
-                <label for="dataInitEnd">Data Inicial do Endereço</label>
-                <input type="date" class="form-control" name="dataInitEnd" value="" required=""  />
-            </div>
-            <div class="form-group">
-                <label for="dataFinEnd">Data Final do Endereço</label>
-                <input type="date" class="form-control" name="dataFinEnd" value=""  required="" />
-            </div>
-            <div class="form-group">
-                <label for="tipoEnd">Tipo de Endereço</label><br>
-                <input type="radio" name="Residencia" value="Residencia" checked=""> Residencia<br>
-                <input type="radio" name="Trabalho" value="Trabalho"> Trabalho<br>
-            </div>
-            <div class="form-group">
                 <label for="city">Cidade:</label>
                 <input type="text" class="form-control" placeholder="Cidade" name="city" value="" maxlength="50"   />
             </div>
@@ -63,11 +50,6 @@
             <div class="form-group">
                 <label for="country">Pais</label>
                 <input type="text" class="form-control" placeholder="Pais" name="country" value="" maxlength="50"   />
-            </div>
-            <div class="form-group">
-                <label for="tipoLog">Tipo do Logradouro</label><br>
-                <input type="radio" name="Avenida" value="Avenida" checked=""> Avenida<br>
-                <input type="radio" name="Rua" value="Rua"> Rua<br>
             </div>
             <div class="form-group">
                 <label for="street">Logradouro:</label>

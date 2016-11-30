@@ -8,8 +8,9 @@ package br.com.cvlattes.servlets;
 import br.com.cvlattes.bin.CalendarioHelper;
 import br.com.cvlattes.controller.LoggableController;
 import br.com.cvlattes.model.Credential;
+import br.com.cvlattes.model.Institute;
+import br.com.cvlattes.model.InstituteName;
 import br.com.cvlattes.model.Person;
-import br.com.cvlattes.model.PersonName;
 import br.com.cvlattes.model.adress.Address;
 import br.com.cvlattes.model.adress.AddressType;
 import br.com.cvlattes.model.adress.City;
@@ -30,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author marco
  */
 @WebServlet(name = "PessoaServlet", urlPatterns = {"/PessoaServlet"})
-public class PessoaServlet extends HttpServlet {
+public class InstituteServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -46,8 +47,8 @@ public class PessoaServlet extends HttpServlet {
     private City city;
     private Address address;
     private Credential credential;
-    private PersonName name;
-    private Person person;
+    private InstituteName name;
+    private Institute institute;
     private String email;
     private LoggableController loggalbeController;
     private Date dataInicial;
@@ -61,7 +62,7 @@ public class PessoaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        name = new PersonName(request.getParameter("firstName"), request.getParameter("middleName"), request.getParameter("lastName"));
+        name = new InstituteName(request.getParameter("name"));
         email = request.getParameter("email");
         credential = new Credential(request.getParameter("cpf"), request.getParameter("password"));
 //    datas
@@ -77,14 +78,14 @@ public class PessoaServlet extends HttpServlet {
 
         address = new Address(dataInicial, dataFinal, addressType, city, streetType, request.getParameter("street"), request.getParameter("number"), request.getParameter("cep"), request.getParameter("complemento"));
 
-        person = new Person(name, credential);
-        person.setEmail(email);
-        person.addAddress(address);
+        institute = new Institute(name, credential);
+        institute.setEmail(email);
+        institute.addAddress(address);
 
         loggablePersistence = new LoggablePersistence();
         loggalbeController = new LoggableController(loggablePersistence);
 
-        loggalbeController.add(person);
+        loggalbeController.add(institute);
 
         response.sendRedirect("index.jsp");
     }

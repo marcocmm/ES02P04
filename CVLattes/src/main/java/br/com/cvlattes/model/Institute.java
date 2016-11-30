@@ -12,7 +12,7 @@ package br.com.cvlattes.model;
 public class Institute extends User {
     
 
-    public Institute(Credential credential, InstituteName name) {
+    public Institute(InstituteName name, Credential credential) {
         super(name, credential);
 
     }
