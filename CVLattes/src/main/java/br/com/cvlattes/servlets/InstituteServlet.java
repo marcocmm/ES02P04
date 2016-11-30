@@ -10,7 +10,6 @@ import br.com.cvlattes.controller.LoggableController;
 import br.com.cvlattes.model.Credential;
 import br.com.cvlattes.model.Institute;
 import br.com.cvlattes.model.InstituteName;
-import br.com.cvlattes.model.Person;
 import br.com.cvlattes.model.adress.Address;
 import br.com.cvlattes.model.adress.AddressType;
 import br.com.cvlattes.model.adress.City;
@@ -21,7 +20,6 @@ import br.com.cvlattes.persistence.LoggablePersistence;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marco
  */
-@WebServlet(name = "PessoaServlet", urlPatterns = {"/PessoaServlet"})
 public class InstituteServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

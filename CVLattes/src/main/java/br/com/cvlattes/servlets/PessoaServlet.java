@@ -20,7 +20,6 @@ import br.com.cvlattes.persistence.LoggablePersistence;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marco
  */
-@WebServlet(name = "PessoaServlet", urlPatterns = {"/PessoaServlet"})
 public class PessoaServlet extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

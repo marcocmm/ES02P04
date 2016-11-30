@@ -8,6 +8,7 @@ package br.com.cvlattes.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,12 +18,15 @@ import java.util.Map;
 public class Curriculum implements Serializable {
 
     private Person user;
-    Collection<Document> documents;
-    Collection<LanguageProficiency> languages;
-    Map<Document, Achievement> achievements;
+    private Collection<Document> documents;
+    private Collection<LanguageProficiency> languages;
+    private Map<Document, Achievement> achievements;
 
     public Curriculum(Person user) {
         this.user = user;
+        this.documents = new ArrayList<>();
+        this.languages = new ArrayList<>();
+        this.achievements = new HashMap<>();
     }
 
     public void setAchievements(Map<Document, Achievement> achievements) {

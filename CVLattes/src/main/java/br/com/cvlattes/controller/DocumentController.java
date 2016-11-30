@@ -6,6 +6,7 @@
 package br.com.cvlattes.controller;
 
 import br.com.cvlattes.model.Document;
+import br.com.cvlattes.persistence.DocumentPersistence;
 
 /**
  *
@@ -13,10 +14,14 @@ import br.com.cvlattes.model.Document;
  */
 public class DocumentController extends Controller<Document>{
 
-    public DocumentController() {
-        super(null);
+    public DocumentController(DocumentPersistence persistence) {
+        super(persistence);
     }
 
+
+
+    
+    
     
 
     

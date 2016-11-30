@@ -53,7 +53,7 @@
             String sessionType;
             Loggable loggable = new Loggable(credential) {
             };
-            while (attributes.hasMoreElements()) {
+            if (attributes.hasMoreElements()) {
                 sessionType = (String) attributes.nextElement();
                 loggable = (Loggable) session.getAttribute(sessionType);
 
@@ -112,6 +112,8 @@
                 } else {
                     response.sendRedirect("index.jsp");
                 }
+            } else {
+                response.sendRedirect("index.jsp");
             }
 
             credential = loggable.getCredential();

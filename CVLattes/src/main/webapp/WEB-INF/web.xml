@@ -8,19 +8,35 @@
     <servlet>
         <servlet-name>Pessoa</servlet-name>
         <servlet-class>br.com.cvlattes.servlets.PessoaServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Institute</servlet-name>
         <servlet-class>br.com.cvlattes.servlets.InstituteServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>br.com.cvlattes.servlets.LoginServlet</servlet-class>
-
     </servlet>
+    <servlet>
+        <servlet-name>Language</servlet-name>
+        <servlet-class>br.com.cvlattes.servlets.LanguageServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>Pessoa</servlet-name>
         <url-pattern>/Pessoa.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Institute</servlet-name>
         <url-pattern>/Institute.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login.get</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Language</servlet-name>
+        <url-pattern>/Language.do</url-pattern>
     </servlet-mapping>
     
     <session-config>

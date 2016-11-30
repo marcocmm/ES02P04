@@ -15,6 +15,7 @@ public class Person extends User {
 
     public Person(PersonName name, Credential credential) {
         super(name, credential);
+        curriculum = new Curriculum(this);
     }
 
     public Person(String name, Credential credential) {
@@ -22,11 +23,19 @@ public class Person extends User {
         //implementar name
     }
 
+    public void setCurriculum(Curriculum curriculum) {
+        this.curriculum = curriculum;
+    }
+
     public String getCPF() {
         return super.getCredential().getIdentifier();
     }
 
     public void addDocument(Document document) {
+    }
+
+    public Curriculum getCurriculum() {
+        return curriculum;
     }
 
     public Document getDocument(Document document) {

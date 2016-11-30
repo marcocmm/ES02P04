@@ -17,7 +17,7 @@
 
             <a href="cadastrarLingua.jsp">Cadastrar Lingua</a>
             </br>
-            <a href="cadastrarDocumento.jsp">Cadastrar Documento</a>
+            <a href="cadastrarDocument.jsp">Cadastrar Documento</a>
 
             <h1>Hello World!</h1>
         </div>

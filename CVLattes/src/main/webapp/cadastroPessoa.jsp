@@ -67,13 +67,6 @@
                 <label for="complemento">Complemento</label>
                 <input type="text" class="form-control" placeholder="Complemento" name="complemento" value="" maxlength="50"   />
             </div>
-            <div class="form-group">
-                <label for="achievement">Graduação</label>
-                </br>
-                <input type="radio" name="achievement" value="Graduado" checked=""> Graduado<br>
-                <input type="radio" name="achievement" value="Mestre"> Mestre<br>
-                <input type="radio" name="achievement" value="Doutor"> Doutor<br>
-            </div>
 
             <input class="btn btn-success" style="width: 100%" type="submit" id="submitData" value="Cadastrar"/>
         </form>

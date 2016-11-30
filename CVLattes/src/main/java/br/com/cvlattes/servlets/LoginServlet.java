@@ -14,10 +14,7 @@ import br.com.cvlattes.model.Moderator;
 import br.com.cvlattes.model.Person;
 import br.com.cvlattes.persistence.LoggablePersistence;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,7 +24,6 @@ import javax.servlet.http.HttpSession;
  *
  * @author marco
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
 
     private LoggableController loggableController;
