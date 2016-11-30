@@ -18,9 +18,7 @@
     <nav id="cssmenu">
         <ul>
             <li><a href="index.jsp">Home</a></li>
-            <li><a href="consultarCurriculo">Consultar Curriculo</a></li>
-            <li><a href="meuCadastro.jsp">Meu Cadastro</a></li>
-
+            <li><a href="consultarCurriculo.jsp">Consultar Curriculo</a></li>
             <li><a class="active" href="#">Cadastro</a>
                 <ul>
                     <li><a href="cadastroPessoa.jsp">Cadastrar Pessoa</a></li>
@@ -28,6 +26,8 @@
 
                 </ul>
             </li>
+            <li><a href="meuCadastro.jsp">Meu Cadastro</a></li>
+            <li><a href="meuCurriculo.jsp">Meu Curriculo</a></li>
 
             </li>
         </ul>
